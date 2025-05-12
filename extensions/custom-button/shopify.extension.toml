@@ -1,0 +1,138 @@
+# Learn more about configuring your checkout UI extension:
+# https://shopify.dev/api/checkout-extensions/checkout/configuration
+
+# The version of APIs your extension will receive. Learn more:
+# https://shopify.dev/docs/api/usage/versioning
+api_version = "2025-04"
+
+[[extensions]]
+name = "Custom Button"
+handle = "custom-button"
+type = "ui_extension"
+
+
+# Controls where in Shopify your extension will be injected,
+# and the file that contains your extension’s source code. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/extension-targets-overview
+
+# ---- Checkout Page Block Rendering ----
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "purchase.checkout.block.render"
+  
+# ---- Thankyou page block rendering ----
+[[extensions.targeting]]   
+module = "./src/Checkout.jsx"
+target = "purchase.thank-you.block.render"  
+export = "thankYouRender"
+
+# ---- Order page block rendering ----
+[[extensions.targeting]]   
+module = "./src/Checkout.jsx"
+target = "customer-account.order-status.block.render"
+export = "orderDetailsRender"
+
+[extensions.capabilities]
+# Gives your extension access to directly query Shopify’s storefront API.
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#api-access
+api_access = true
+
+# Gives your extension access to make external network calls, using the
+# JavaScript `fetch()` API. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#network-access
+# network_access = true
+
+# Loads metafields on checkout resources, including the cart,
+# products, customers, and more. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#metafields
+
+# [[extensions.metafields]]
+# namespace = "my_namespace"
+# key = "my_key"
+# [[extensions.metafields]]
+# namespace = "my_namespace"
+# key = "my_other_key"
+
+[[extensions.metafields]]
+    namespace = "billing"
+    key = "active_plan"
+
+# Defines settings that will be collected from merchants installing
+# your extension. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#settings-definition
+
+# [extensions.settings]
+    # [[extensions.settings.fields]]
+    # key = "banner_title"
+    # type = "single_line_text_field"
+    # name = "Banner title"
+    # description = "Enter a title for the banner"
+
+# Defines settings that will be collected from merchants installing
+# your extension.
+[extensions.settings]
+    [[extensions.settings.fields]]
+    key = "buttonText"
+    type = "single_line_text_field"
+    name = "Button Text"
+    description = "Enter a text for the button"
+    
+    [[extensions.settings.fields]]
+    key = "buttonUrl"
+    type = "single_line_text_field"
+    name = "Button URL"
+    description = "Enter a URL for the button to navigate to when clicked. Make sure to include https"
+    
+    [[extensions.settings.fields]]
+    key = "buttonAlignment"
+    type = "single_line_text_field"
+    name = "Button Alignment" 
+    [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"start\", \"center\", \"end\"]"
+    
+    [[extensions.settings.fields]]
+    key = "buttonStyle"
+    type = "single_line_text_field"
+    name = "Button Style" 
+    [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"monochrome\", \"critical\"]"
+    
+    [[extensions.settings.fields]]
+    key = "buttonKind"
+    type = "single_line_text_field"
+    name = "Button Kind" 
+    [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"plain\", \"primary\", \"secondary\"]"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

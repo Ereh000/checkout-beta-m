@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema-reference
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Note that some adapters may set a maximum length for the String type by default, please ensure your strings are long
+// enough when changing adapters.
+// See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+model UpsellSettings {
+  id                  Int      @id @default(autoincrement())
+  shopId              String   // Remove @unique
+  upsellName          String   @unique // Add @unique here
+  selectedProducts    Json
+  selectedCollections Json
+  upsellProducts      Json
+  selectionType       String   @default("specific") // Add this line
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model PaymentRename {
+  id            String   @id @default(cuid())
+  shopId        String
+  customizeName String
+  paymentMethod String
+  newName       String
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("payment_renames")
+}
+
+
+// Add the new model for Shipping Customization
+model ShippingCustomization {
+  id                   String   @id @default(cuid()) // Unique identifier
+  type                 String   @default("Hide Shipping")  // Add default value
+  shop                 String   // Shop domain associated with this customization
+  name                 String   // User-defined name for the customization
+  shippingMethodToHide String   // The name of the shipping method to hide
+  conditions           Json     // JSON field to store the array of condition objects
+  createdAt            DateTime @default(now()) // Timestamp of creation
+  updatedAt            DateTime @updatedAt // Timestamp of last update
+  @@index([shop]) // Add an index for faster lookups by shop
+  @@map("shipping_customizations") // Optional: map to a specific table name
+}
+
+// Add the new model for Shipping Customization
+model ShippingMessage {
+  id                   String   @id @default(cuid()) // Unique identifier
+  type                 String   @default("Rename Shipping")  // Add default value
+  shop                 String   // Shop domain associated with this customization
+  name                 String   // User-defined name for the customization
+  shippingMethodToHide String   // The name of the shipping method to hide
+  message              String   // The message to rename shipping method
+  conditions           Json     // JSON field to store the array of condition objects
+  createdAt            DateTime @default(now()) // Timestamp of creation
+  updatedAt            DateTime @updatedAt // Timestamp of last update
+  @@index([shop]) // Add an index for faster lookups by shop
+}
+
+
+// Model for Payment Hiding Rules
+model PaymentHide {
+  id            Int      @id @default(autoincrement())
+  shopId        String   // Identifier for the Shopify store
+  customizeName String   // User-defined name for this hiding rule
+  paymentMethod String   // The name of the payment method to potentially hide
+  conditions    Json     // JSON object storing the conditions (cartTotal, products, shippingCountry)
+  status        String   @default("active") // Status of the rule (e.g., "active", "inactive")
+  createdAt     DateTime @default(now())    // Timestamp of creation
+  updatedAt     DateTime @updatedAt        // Timestamp of last update
+
+  @@unique([shopId, customizeName]) // Ensures that a shop cannot have two rules with the same name
+  @@index([shopId])                 // Index for faster lookups based on the shop
+  @@map("payment_hide")             // Explicitly map to the 'payment_hide' table name in the database
+}

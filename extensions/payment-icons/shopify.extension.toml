@@ -1,0 +1,156 @@
+# Learn more about configuring your checkout UI extension:
+# https://shopify.dev/api/checkout-extensions/checkout/configuration
+
+# The version of APIs your extension will receive. Learn more:
+# https://shopify.dev/docs/api/usage/versioning
+api_version = "2025-04"
+
+[[extensions]]
+name = "Payement Icons"
+handle = "payment-icons"
+type = "ui_extension"
+
+
+# Controls where in Shopify your extension will be injected,
+# and the file that contains your extension’s source code. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/extension-targets-overview
+
+# ---- Checkout Page Block Rendering ----
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "purchase.checkout.block.render"
+
+# ---- Thankyou page block rendering ----
+[[extensions.targeting]]   
+module = "./src/Checkout.jsx"
+target = "purchase.thank-you.block.render"  
+export = "thankYouRender"
+
+# ---- Order page block rendering ----
+[[extensions.targeting]]   
+module = "./src/Checkout.jsx"  
+target = "customer-account.order-status.block.render"
+export = "orderDetailsRender"
+
+[extensions.capabilities]
+# Gives your extension access to directly query Shopify’s storefront API.
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#api-access
+api_access = true
+
+# Gives your extension access to make external network calls, using the
+# JavaScript `fetch()` API. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#network-access
+# network_access = true
+
+# Loads metafields on checkout resources, including the cart,
+# products, customers, and more. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#metafields
+
+# [[extensions.metafields]]
+# namespace = "my_namespace"
+# key = "my_key"
+[[extensions.metafields]]
+    namespace = "billing"
+    key = "active_plan"
+
+# Defines settings that will be collected from merchants installing
+# your extension. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#settings-definition
+  
+[extensions.settings]
+
+    [[extensions.settings.fields]]
+    key = "banner_title"
+    type = "single_line_text_field"
+    name = "Banner title"
+    description = "Enter a title for the banner"
+
+    [[extensions.settings.fields]]
+    key = "image_1_icon"
+    type = "single_line_text_field"
+    name = "Image #1 Icon"
+    description = "Available options: none, affin-bank, alipay, airtel-money, afterpay, akulaku, amazon, american-express, apple-pay, facebook-pay"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"none\", \"affin-bank\", \"alipay\", \"airtel-money\", \"afterpay\", \"akulaku\", \"amazon\", \"american-express\", \"apple-pay\", \"facebook-pay\"]"
+
+    [[extensions.settings.fields]]
+    key = "image_1_url"
+    type = "single_line_text_field"
+    name = "Image #1 URL"
+    description = "Enter the URL for the first payment icon (optional)"
+
+    [[extensions.settings.fields]]
+    key = "image_2_icon"
+    type = "single_line_text_field"
+    name = "Image #2 Icon"
+    description = "Available options: none, affin-bank, alipay, airtel-money, afterpay, akulaku, amazon, american-express, apple-pay, facebook-pay"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"none\", \"affin-bank\", \"alipay\", \"airtel-money\", \"afterpay\", \"akulaku\", \"amazon\", \"american-express\", \"apple-pay\", \"facebook-pay\"]"
+
+    [[extensions.settings.fields]]
+    key = "image_2_url"
+    type = "single_line_text_field"
+    name = "Image #2 URL"
+    description = "Enter the URL for the second payment icon (optional)"
+
+    [[extensions.settings.fields]]
+    key = "image_3_icon"
+    type = "single_line_text_field"
+    name = "Image #3 Icon"
+    description = "Available options: none, affin-bank, alipay, airtel-money, afterpay, akulaku, amazon, american-express, apple-pay, facebook-pay"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"none\", \"affin-bank\", \"alipay\", \"airtel-money\", \"afterpay\", \"akulaku\", \"amazon\", \"american-express\", \"apple-pay\", \"facebook-pay\"]"
+
+    [[extensions.settings.fields]]
+    key = "image_3_url"
+    type = "single_line_text_field"
+    name = "Image #3 URL"
+    description = "Enter the URL for the third payment icon (optional)"
+
+    [[extensions.settings.fields]]
+    key = "image_4_icon"
+    type = "single_line_text_field"
+    name = "Image #4 Icon"
+    description = "Available options: none, affin-bank, alipay, airtel-money, afterpay, akulaku, amazon, american-express, apple-pay, facebook-pay"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"none\", \"affin-bank\", \"alipay\", \"airtel-money\", \"afterpay\", \"akulaku\", \"amazon\", \"american-express\", \"apple-pay\", \"facebook-pay\"]"
+
+    [[extensions.settings.fields]]
+    key = "image_4_url"
+    type = "single_line_text_field"
+    name = "Image #4 URL"
+    description = "Enter the URL for the fourth payment icon (optional)"
+
+    [[extensions.settings.fields]]
+    key = "image_5_icon"
+    type = "single_line_text_field"   
+    name = "Image #5 Icon"
+    description = "Available options: none, affin-bank, alipay, airtel-money, afterpay, akulaku, amazon, american-express, apple-pay, facebook-pay"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"none\", \"affin-bank\", \"alipay\", \"airtel-money\", \"afterpay\", \"akulaku\", \"amazon\", \"american-express\", \"apple-pay\", \"facebook-pay\"]"
+
+    [[extensions.settings.fields]]
+    key = "image_5_url"
+    type = "single_line_text_field"
+    name = "Image #5 URL"
+    description = "Enter the URL for the fifth payment icon (optional)"
+
+    [[extensions.settings.fields]]
+    key = "image_6_icon"
+    type = "single_line_text_field"   
+    name = "Image #6 Icon"
+    description = "Available options: none, affin-bank, alipay, airtel-money, afterpay, akulaku, amazon, american-express, apple-pay, facebook-pay"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"none\", \"affin-bank\", \"alipay\", \"airtel-money\", \"afterpay\", \"akulaku\", \"amazon\", \"american-express\", \"apple-pay\", \"facebook-pay\"]"
+
+    [[extensions.settings.fields]]  
+    key = "image_6_url"
+    type = "single_line_text_field"
+    name = "Image #6 URL"
+    description = "Enter the URL for the sixth payment icon (optional)"

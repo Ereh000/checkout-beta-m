@@ -1,0 +1,39 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "9ef15b80890503cdfa0cd91e4f6999d9"
+name = "Elevon Checkout Maximizer"
+handle = "elevon-checkout-maximizer"
+application_url = "https://lightning-reasoning-card-cowboy.trycloudflare.com"
+embedded = true
+
+[webhooks]
+api_version = "2025-04"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/data_request"
+  compliance_topics = [ "customers/data_request" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/redact"
+  compliance_topics = [ "customers/redact" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/shop/redact"
+  compliance_topics = [ "shop/redact" ]
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_checkout_branding_settings,write_checkout_branding_settings,write_checkouts,write_delivery_customizations,write_discounts,write_payment_customizations,write_products"
+
+[auth]
+redirect_urls = [
+  "https://lightning-reasoning-card-cowboy.trycloudflare.com/auth/callback",
+  "https://lightning-reasoning-card-cowboy.trycloudflare.com/auth/shopify/callback",
+  "https://lightning-reasoning-card-cowboy.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true

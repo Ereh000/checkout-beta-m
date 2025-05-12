@@ -1,0 +1,41 @@
+query RunInput {
+  shop {
+    metafield(namespace: "cart", key: "hide_payment") {
+      value
+    }
+  }
+  cart {
+    cost {
+      totalAmount {
+        amount
+      }
+    }
+    lines {
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product{
+            id
+          }
+          id
+        }
+      }
+    }
+    buyerIdentity {
+      customer {
+        hasTags {
+          tag
+        }
+      }
+    }
+    deliveryGroups{
+      deliveryAddress{
+        countryCode
+      }
+    }
+  }
+  paymentMethods {
+    id
+    name
+  }
+}

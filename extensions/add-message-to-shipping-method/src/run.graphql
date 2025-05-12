@@ -1,0 +1,51 @@
+query RunInput {
+  # Function configuration metafield
+  shop {
+    metafield(namespace: "method", key: "rename_shipping") {
+      value
+    }
+  }
+  # Cart information needed for conditions
+  cart {
+    # Cart total for 'cart_total' condition
+    cost {
+      totalAmount {
+        amount
+      }
+    }
+    # Delivery groups and options for hiding
+    deliveryGroups {
+      # Shipping address for 'shipping_country' condition
+      deliveryAddress {
+        countryCode
+      }
+      deliveryOptions {
+        handle
+        title
+      }
+    }
+    # Cart lines for 'product_tag' condition
+    lines {
+      merchandise {
+        ... on ProductVariant { # Need to specify the type to access product
+          product {
+            hasTags(tags: "sale") {
+              hasTag
+              tag
+            }
+          }
+        }
+      }
+    }
+    # Buyer identity for 'customer_tag' and 'customer_type' conditions
+    buyerIdentity {
+      customer {
+        hasTags(tags: "vip") { # Fetch customer tags (adjust 'first' if needed)
+          tag
+        }
+      }
+    }
+  }
+}
+
+# --- Removed the commented out query ---

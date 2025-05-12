@@ -1,0 +1,104 @@
+# Learn more about configuring your checkout UI extension:
+# https://shopify.dev/api/checkout-extensions/checkout/configuration
+
+# The version of APIs your extension will receive. Learn more:
+# https://shopify.dev/docs/api/usage/versioning
+api_version = "2025-01"
+
+[[extensions]]
+name = "Featured Products / Upsells"
+handle = "upsell-block"
+type = "ui_extension"
+
+
+# Controls where in Shopify your extension will be injected,
+# and the file that contains your extension’s source code. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/extension-targets-overview
+
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "purchase.checkout.block.render"
+
+[extensions.capabilities]
+# Gives your extension access to directly query Shopify’s storefront API.
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#api-access
+api_access = true
+
+# Gives your extension access to make external network calls, using the
+# JavaScript `fetch()` API. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#network-access
+# network_access = true
+
+# Loads metafields on checkout resources, including the cart,
+# products, customers, and more. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#metafields
+
+[[extensions.metafields]]
+    namespace = "settings"
+    key = "upsell"
+[[extensions.metafields]]  
+    namespace = "upsellProducts"
+    key = "settings"
+
+[[extensions.metafields]]
+    namespace = "billing"
+    key = "active_plan"
+
+# Defines settings that will be collected from merchants installing
+# your extension. Learn more:
+# https://shopify.dev/docs/api/checkout-ui-extensions/unstable/configuration#settings-definition
+
+# [extensions.settings]
+# [[extensions.settings.fields]]
+# key = "banner_title"
+# type = "single_line_text_field"
+# name = "Banner title"
+# description = "Enter a title for the banner"
+
+ [extensions.settings]
+    [[extensions.settings.fields]]
+    key = "layout"
+    type = "single_line_text_field"
+    name = "Layout"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"default\", \"column\"]"
+
+
+    [[extensions.settings.fields]]
+    key = "heading"
+    type = "single_line_text_field"  
+    name = "Heading"
+    description = "Enter a heading for the upsell section"
+
+    [[extensions.settings.fields]]
+    key = "buttonText"
+    type = "single_line_text_field"
+    name = "Button Text"
+    description = "Text to display on the add button"
+
+    [[extensions.settings.fields]]
+    key = "buttonStyle"
+    type = "single_line_text_field"
+    name = "Button Style"
+    description = "Choose the button style"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"primary\", \"secondary\", \"plain\"]"
+
+    [[extensions.settings.fields]]
+    key = "buttonAppearance"
+    type = "single_line_text_field"
+    name = "Button Appearance"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"base\",\"success\", \"warning\", \"critical\"]"
+ 
+    [[extensions.settings.fields]]
+    key = "buttonPosition"
+    type = "single_line_text_field"
+    name = "Button Position"
+    description = "Choose the button position"
+        [[extensions.settings.fields.validations]]
+        name = "choices"
+        value = "[\"start\", \"center\", \"end\"]"
