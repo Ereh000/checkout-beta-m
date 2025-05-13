@@ -57,8 +57,6 @@ function Extension() {
   )?.metafield.value;
   console.log("shopMetafield:", shopMetafield); // Add this line to log the metafield value
 
-  // if()
-
   // Create an array of payment icons and URLs from settings
   const paymentMethods = [
     { icon: image_1_icon, url: image_1_url },
@@ -89,7 +87,7 @@ function Extension() {
                 <PaymentIcon key={index} name={method.icon} />
               )
             )}
-          </InlineStack>
+          </InlineStack>   
         </View> 
       )}
     </>

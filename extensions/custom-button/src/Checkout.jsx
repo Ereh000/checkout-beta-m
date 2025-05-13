@@ -9,9 +9,9 @@ import {
 
 // --------------------- Checkout Page Block Rendering -------------------------------
 export default reactExtension("purchase.checkout.block.render", () => (
-  <Extension />
+  <Extension />  
 ));
-   
+      
 // --------------------- Thankyou Page Block Rendering -------------------------------
 const thankYouRender = reactExtension("purchase.thank-you.block.render", () => (
   <Extension />

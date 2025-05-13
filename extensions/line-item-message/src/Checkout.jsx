@@ -16,7 +16,7 @@ export default function Extension() {
   const planMetafield = metafields.find(
     (metafield) =>
       metafield.target.type === "shop" &&
-      metafield.metafield.namespace === "billing" &&
+      metafield.metafield.namespace === "billing" &&   
       metafield.metafield.key === "active_plan"
   )?.metafield.value;
 

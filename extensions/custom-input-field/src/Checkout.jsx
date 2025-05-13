@@ -61,7 +61,7 @@ function DeliveryInstructions() {
             onChange={handleCheckboxChange}
           >
             Add delivery instructions
-          </Checkbox>
+          </Checkbox>   
           {checked && (
             <TextField
               label="Delivery Instructions"

@@ -35,7 +35,7 @@ export const action = async ({ request }) => {
   //   const billingType = formData.get("billingType");
 
   const returnUrl = `https://admin.shopify.com/store/${shop}/apps/${appHandle}/app/subscription-manage`; //   const returnUrl = `https://admin.shopify.com/store/athatake/apps/checkout-deploy-2/app`;
-
+   
   console.log("Form Data:", plan);
 
   if (plan === "basic") {

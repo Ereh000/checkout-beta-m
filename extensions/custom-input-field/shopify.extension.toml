@@ -40,7 +40,7 @@ api_access = true
 
 # [[extensions.metafields]]
 # namespace = "my_namespace"
-# key = "my_key"  
+# key = "my_key"    
 # [[extensions.metafields]]
 # namespace = "my_namespace"
 # key = "my_other_key"

@@ -171,7 +171,7 @@ export async function action({ request }) {
                 namespace: "method",
                 ownerId: shopGid,
                 type: "json",
-                value: JSON.stringify(metaConfig),
+                value: JSON.stringify(metaConfig),  
               },
             ],
           },

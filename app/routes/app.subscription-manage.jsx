@@ -39,7 +39,7 @@ export async function loader({ request }) {
       query {
         shop {
           id
-          plan {
+          plan {     
             partnerDevelopment
           }
         }
@@ -137,10 +137,7 @@ export async function loader({ request }) {
 
   const metafield = (await metafieldResponse.json()).data?.metafieldsSet
     ?.metafields?.[0];
-  // const metafield = metafieldResponse.json().data?.metafieldsSet?.metafields?.[0];
-  // if (metafield) {
-    console.log("Metafield set response:", metafield);
-  // }
+  console.log("Metafield set response:", metafield);
 
   // Return plan constants to the client along with active plan and pricing
   return {

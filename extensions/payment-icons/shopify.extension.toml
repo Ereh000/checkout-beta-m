@@ -49,9 +49,10 @@ api_access = true
 # [[extensions.metafields]]
 # namespace = "my_namespace"
 # key = "my_key"
+
 [[extensions.metafields]]
     namespace = "billing"
-    key = "active_plan"
+    key = "active_plan"  
 
 # Defines settings that will be collected from merchants installing
 # your extension. Learn more:
